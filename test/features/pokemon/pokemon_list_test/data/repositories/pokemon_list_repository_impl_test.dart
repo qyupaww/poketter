@@ -8,6 +8,7 @@ import 'package:poketter/features/pokemon/pokemon_list/data/models/response/poke
     as response_pokemon_list;
 import 'package:poketter/features/pokemon/pokemon_list/domain/entities/pokemon_list_entity.dart'
     as entity_pokemon_list;
+import 'package:poketter/features/pokemon/pokemon_detail/data/datasources/pokemon_detail_remote_data_source.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:morpheme_http/morpheme_http.dart';
@@ -15,14 +16,20 @@ import 'package:morpheme_http/morpheme_http.dart';
 class MockRemoteDataSource extends Mock
     implements PokemonListRemoteDataSource {}
 
+class MockDetailRemoteDataSource extends Mock
+    implements PokemonDetailRemoteDataSource {}
+
 Future<void> main() async {
   late MockRemoteDataSource mockRemoteDatasource;
+  late MockDetailRemoteDataSource mockDetailRemoteDatasource;
   late PokemonListRepositoryImpl repository;
 
   setUp(() {
     mockRemoteDatasource = MockRemoteDataSource();
+    mockDetailRemoteDatasource = MockDetailRemoteDataSource();
     repository = PokemonListRepositoryImpl(
       remoteDataSource: mockRemoteDatasource,
+      detailRemoteDataSource: mockDetailRemoteDatasource,
     );
   });
 

@@ -18,7 +18,10 @@ void setupLocatorPokemonList() {
     ..registerLazySingleton(() => PokemonListUseCase(repository: locator()))
     // *Repository
     ..registerLazySingleton<PokemonListRepository>(
-      () => PokemonListRepositoryImpl(remoteDataSource: locator()),
+      () => PokemonListRepositoryImpl(
+        remoteDataSource: locator(),
+        detailRemoteDataSource: locator(),
+      ),
     )
     // ..registerLazySingleton<PokemonListRepository>(
     //   () => PokemonListMockRepositoryImpl(),
