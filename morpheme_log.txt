@@ -1,9 +1,14 @@
 
-[32;1mgenerated[0m C:\Project\Flutter\poketter\.vscode\launch.json
-[32;1mgenerated[0m C:\Project\Flutter\poketter\.vscode\tasks.json
-[32;1mgenerated[0m C:\Project\Flutter\poketter\.idea\runConfigurations\Firebase Dev.run.xml
-[32;1mgenerated[0m C:\Project\Flutter\poketter\.idea\runConfigurations\Debug Dev.run.xml
-[32;1mgenerated[0m C:\Project\Flutter\poketter\.idea\runConfigurations\Profile Dev.run.xml
-[32;1mgenerated[0m C:\Project\Flutter\poketter\.idea\runConfigurations\Release Dev.run.xml
-morpheme_lite config
+🎨 Generating color classes...
+Formatted morpheme_colors.dart
+Formatted src\morpheme_color.dart
+Formatted src\morpheme_color_dark.dart
+Formatted src\morpheme_color_light.dart
+Formatted 4 files (4 changed) in 0.05 seconds.
+Formatted morpheme_themes.dart
+Formatted 4 files (1 changed) in 0.04 seconds.
+morpheme_lite color2dart generation completed
+[32;1mSUCCESS[0m
+✅ Color generation completed successfully
+Color2Dart generation completed successfully!
 [32;1mSUCCESS[0m

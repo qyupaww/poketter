@@ -1,0 +1,34 @@
+json2dart:
+  body_format_date_time: yyyy-MM-dd
+  response_format_date_time: yyyy-MM-dd HH:mm
+  api: true
+  endpoint: true
+  unit-test: true
+  replace: false
+
+  environment_url:
+    - &base_url BASE_URL
+
+  remote:
+    # Pokemon
+    .pokemon_list: &pokemon_list
+      base_url: *base_url
+      path: /api/v2/pokemon
+      method: get
+      body: json2dart/json/pokemon/body/pokemon_list_body.json
+      response: json2dart/json/pokemon/response/pokemon_list_response.json
+      cache_strategy: async_or_cache
+      
+    .pokemon_detail: &pokemon_detail
+      base_url: *base_url
+      path: /api/v2/pokemon/:id
+      method: get
+      body: json2dart/json/pokemon/body/pokemon_detail_body.json
+      response: json2dart/json/pokemon/response/pokemon_detail_response.json
+      cache_strategy: async_or_cache
+
+pokemon: # feature
+  pokemon_list: # page
+    pokemon_list: *pokemon_list # api name
+  pokemon_detail:
+    pokemon_detail: *pokemon_detail

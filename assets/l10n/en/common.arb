@@ -1,0 +1,13 @@
+{
+  "@@locale": "en",
+  "agree": "Agree",
+  "cancel": "Cancel",
+  "emptyStateDescription": "Sorry, we couldn't find any results for your search. Try using another keyword.",
+  "emptyStateTitle": "No results found",
+  "language": "Language",
+  "noInternet": "No internet",
+  "oke": "Oke",
+  "selamatDatang": "Welcome",
+  "somethingWentWrong": "Something went wrong",
+  "theme": "Theme"
+}

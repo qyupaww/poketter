@@ -1,0 +1,29 @@
+{
+  "id": 1,
+  "name": "bulbasaur",
+  "height": 7,
+  "weight": 69,
+  "sprites": {
+    "other": {
+      "official-artwork": {
+        "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+      }
+    }
+  },
+  "stats": [
+    {
+      "base_stat": 45,
+      "stat": {
+        "name": "hp"
+      }
+    }
+  ],
+  "types": [
+    {
+      "slot": 1,
+      "type": {
+        "name": "grass"
+      }
+    }
+  ]
+}

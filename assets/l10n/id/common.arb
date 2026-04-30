@@ -1,0 +1,13 @@
+{
+  "@@locale": "id",
+  "agree": "Setuju",
+  "cancel": "Batal",
+  "emptyStateDescription": "Maaf, kami tidak menemukan hasil untuk pencarian Anda. Coba gunakan kata kunci lain.",
+  "emptyStateTitle": "Hasil pencarian tidak ditemukan",
+  "language": "Bahasa",
+  "noInternet": "Tidak ada internet",
+  "oke": "Oke",
+  "selamatDatang": "Selamat Datang",
+  "somethingWentWrong": "Ada kesalahan pada sistem",
+  "theme": "Tema"
+}
