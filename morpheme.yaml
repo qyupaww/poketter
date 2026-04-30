@@ -1,0 +1,79 @@
+# Morpheme CLI Lite Configuration
+# This file contains all the configuration needed for Morpheme CLI Lite commands
+# Learn more: https://github.com/morphemedesign/morpheme-flutter-cli-lite
+
+# Use FVM (Flutter Version Management) for Flutter SDK management
+fvm: false
+
+# Flavor configurations for different build environments
+flavor:
+  dev:
+    FLAVOR: dev
+    APP_NAME: Poketter
+    ANDROID_APPLICATION_ID: poketter.dev
+    IOS_APPLICATION_ID: poketter.dev
+    BASE_URL: https://pokeapi.co/api/v2
+  # stag:
+  #   FLAVOR: stag
+  #   APP_NAME: Morpheme Lite Stag
+  #   ANDROID_APPLICATION_ID: design.morpheme_lite.stag
+  #   IOS_APPLICATION_ID: design.morphemeLite.stag
+  #   BASE_URL: https://reqres.in/api
+  # prod:
+  #   FLAVOR: prod
+  #   APP_NAME: Morpheme Lite
+  #   ANDROID_APPLICATION_ID: design.morpheme_lite
+  #   IOS_APPLICATION_ID: design.morphemeLite
+  #   BASE_URL: https://reqres.in/api
+
+# Firebase configuration (uncomment and configure when needed)
+#firebase:
+#  dev:
+#    project_id: "morpheme_lite-dev"
+#    token: "YOUR FIREBASE TOKEN: firebase login:ci"
+#  stag:
+#    project_id: "morpheme_lite-stag"
+#    token: "YOUR FIREBASE TOKEN: firebase login:ci"
+#  prod:
+#    project_id: "morpheme_lite"
+#    token: "YOUR FIREBASE TOKEN: firebase login:ci"
+
+# Color to Dart code generation configuration
+color2dart:
+  color2dart_dir: color2dart
+  output_dir: lib/core/themes
+
+# Localization configuration
+localization:
+  arb_dir: assets/l10n
+  template_arb_file: id.arb
+  output_localization_file: s.dart
+  output_class: S
+  output_dir: lib/core/l10n
+  replace: false
+
+# Asset generation configuration
+assets:
+  pubspec_dir: .
+  output_dir: lib/core/assets
+  create_library_file: true
+  
+# Code coverage configuration
+coverage:
+  lcov_dir: coverage/lcov.info
+  output_html_dir: coverage/html
+  remove:
+    - "*/mock/*"
+    - "*.freezed.*"
+    - "*.g.*"
+    - "*/l10n/*"
+    - "*_state.dart"
+    - "*_event.dart"
+    - "**/locator.dart"
+    - "**/environtment.dart"
+    - "lib/core/test/*"
+    - "lib/core/constants/*"
+    - "lib/core/themes/*"
+    - "lib/routes/routes.dart"
+    - "lib/generated_plugin_registrant.dart"
+

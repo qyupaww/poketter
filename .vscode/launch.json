@@ -1,0 +1,68 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Morpheme Debug Dev",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            
+            "program": "lib/main.dart",
+            "args": [
+                "--dart-define",
+				"FLAVOR=dev",
+				"--dart-define",
+				"APP_NAME=Poketter",
+				"--dart-define",
+				"ANDROID_APPLICATION_ID=poketter.dev",
+				"--dart-define",
+				"IOS_APPLICATION_ID=poketter.dev",
+				"--dart-define",
+				"BASE_URL=https://pokeapi.co/api/v2"
+            ]
+        },
+        {
+            "name": "Morpheme Profile Dev",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            
+            "program": "lib/main.dart",
+            "args": [
+                "--dart-define",
+				"FLAVOR=dev",
+				"--dart-define",
+				"APP_NAME=Poketter",
+				"--dart-define",
+				"ANDROID_APPLICATION_ID=poketter.dev",
+				"--dart-define",
+				"IOS_APPLICATION_ID=poketter.dev",
+				"--dart-define",
+				"BASE_URL=https://pokeapi.co/api/v2"
+            ]
+        },
+        {
+            "name": "Morpheme Release Dev",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            
+            "program": "lib/main.dart",
+            "args": [
+                "--dart-define",
+				"FLAVOR=dev",
+				"--dart-define",
+				"APP_NAME=Poketter",
+				"--dart-define",
+				"ANDROID_APPLICATION_ID=poketter.dev",
+				"--dart-define",
+				"IOS_APPLICATION_ID=poketter.dev",
+				"--dart-define",
+				"BASE_URL=https://pokeapi.co/api/v2"
+            ]
+        },
+    ]
+}
