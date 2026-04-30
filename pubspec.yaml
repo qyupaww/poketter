@@ -24,7 +24,7 @@ dependencies:
   google_fonts: ^8.0.1
 
   # Navigation
-  go_router: ^17.1.0
+  go_router: ^17.2.2
 
   # Service Locator
   get_it: ^9.2.0

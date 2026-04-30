@@ -3,6 +3,8 @@ import 'package:poketter/features/pokemon/pokemon_list/data/models/body/pokemon_
 import 'package:morpheme_base/morpheme_base.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:poketter/core/constants/constant_routes.dart';
 
 import '../pages/pokemon_list_page.dart';
 
@@ -52,6 +54,13 @@ class PokemonListCubit extends MorphemeCubit<PokemonListStateCubit> {
       onSuccess: (state) {
         // handle success state
       },
+    );
+  }
+
+  void goToDetail(BuildContext context, String id) {
+    context.pushNamed(
+      ConstantRoutes.pokemonDetail,
+      pathParameters: {'id': id},
     );
   }
 }

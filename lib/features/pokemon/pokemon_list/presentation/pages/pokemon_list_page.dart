@@ -5,7 +5,6 @@ import 'package:poketter/core/components/components.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:poketter/features/pokemon/pokemon_list/presentation/bloc/pokemon_list/pokemon_list_bloc.dart';
 import 'package:poketter/features/pokemon/pokemon_list/domain/entities/pokemon_list_entity.dart';
-import 'package:poketter/features/pokemon/pokemon_detail/presentation/pages/pokemon_detail_page.dart';
 import 'package:poketter/core/themes/morpheme_colors/morpheme_colors.dart';
 import 'package:poketter/core/extensions/string_extensions.dart';
 
@@ -71,11 +70,7 @@ class _PokemonListPageState extends State<PokemonListPage>
                       return InkWell(
                         onTap: () {
                           if (!isLoading) {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => PokemonDetailPage(id: id),
-                              ),
-                            );
+                            context.read<PokemonListCubit>().goToDetail(context, id);
                           }
                         },
                         child: Container(
