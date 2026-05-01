@@ -1,0 +1,16 @@
+{
+  "egg_groups": [
+    {
+      "name": "monster",
+      "url": "https://pokeapi.co/api/v2/egg-group/1/"
+    },
+    {
+      "name": "plant",
+      "url": "https://pokeapi.co/api/v2/egg-group/7/"
+    }
+  ],
+  "hatch_counter": 20,
+  "evolution_chain": {
+    "url": "https://pokeapi.co/api/v2/evolution-chain/1/"
+  }
+}

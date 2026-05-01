@@ -32,14 +32,12 @@ class PokemonListCubit extends MorphemeCubit<PokemonListStateCubit> {
   List<BlocProvider> blocProviders(BuildContext context) => [
     BlocProvider<PokemonListBloc>.value(value: pokemonListBloc),
   ];
-
   @override
   List<BlocListener> blocListeners(BuildContext context) => [
     BlocListener<PokemonListBloc, PokemonListState>(
       listener: listenerPokemonListBloc,
     ),
   ];
-
   @override
   void dispose() {
     pokemonListBloc.close();

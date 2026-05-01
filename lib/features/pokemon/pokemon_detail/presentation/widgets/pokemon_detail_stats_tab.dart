@@ -68,9 +68,7 @@ class PokemonDetailStatsTab extends StatelessWidget {
               final barColor = _getStatBarColor(baseStat);
 
               return Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: ConstantSizes.s8,
-                ),
+                padding: const EdgeInsets.symmetric(vertical: ConstantSizes.s8),
                 child: Row(
                   children: [
                     SizedBox(
@@ -89,9 +87,7 @@ class PokemonDetailStatsTab extends StatelessWidget {
                     ),
                     Expanded(
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                          ConstantRadius.r8,
-                        ),
+                        borderRadius: BorderRadius.circular(ConstantRadius.r8),
                         child: LinearProgressIndicator(
                           value: baseStat / 255.0,
                           backgroundColor: context.color.bgGrey,

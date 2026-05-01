@@ -27,8 +27,26 @@ json2dart:
       response: json2dart/json/pokemon/response/pokemon_detail_response.json
       cache_strategy: async_or_cache
 
+    .pokemon_species: &pokemon_species
+      base_url: *base_url
+      path: /api/v2/pokemon-species/:id
+      method: get
+      body: json2dart/json/pokemon/body/pokemon_detail_body.json
+      response: json2dart/json/pokemon/response/pokemon_species_response.json
+      cache_strategy: async_or_cache
+
+    .evolution_chain: &evolution_chain
+      base_url: *base_url
+      path: /api/v2/evolution-chain/:id
+      method: get
+      body: json2dart/json/pokemon/body/pokemon_detail_body.json
+      response: json2dart/json/pokemon/response/evolution_chain_response.json
+      cache_strategy: async_or_cache
+
 pokemon: # feature
   pokemon_list: # page
     pokemon_list: *pokemon_list # api name
   pokemon_detail:
     pokemon_detail: *pokemon_detail
+    pokemon_species: *pokemon_species
+    evolution_chain: *evolution_chain

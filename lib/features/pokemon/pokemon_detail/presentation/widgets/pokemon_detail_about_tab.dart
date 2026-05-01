@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:morpheme_base/morpheme_base.dart';
 import 'package:poketter/core/components/components.dart';
 import 'package:poketter/core/constants/constant_sizes.dart';
 import 'package:poketter/core/themes/morpheme_colors/morpheme_colors.dart';
 import 'package:poketter/features/pokemon/pokemon_detail/domain/entities/pokemon_detail_entity.dart';
+import 'package:poketter/features/pokemon/pokemon_detail/presentation/bloc/pokemon_species/pokemon_species_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class PokemonDetailAboutTab extends StatelessWidget {
@@ -29,7 +31,11 @@ class PokemonDetailAboutTab extends StatelessWidget {
     final feet = heightFeet.floor();
     final inches = ((heightFeet - feet) * 12).round();
 
-    final types = data?.types?.map((t) => _capitalizeFirst(t.type?.name ?? '')).join(', ') ?? '-';
+    final types =
+        data?.types
+            ?.map((t) => _capitalizeFirst(t.type?.name ?? ''))
+            .join(', ') ??
+        '-';
 
     return Skeletonizer(
       enabled: isLoading,
@@ -56,28 +62,39 @@ class PokemonDetailAboutTab extends StatelessWidget {
               value: '$weightLbs lbs (${weightKg.toStringAsFixed(1)} kg)',
             ),
             _buildDivider(context),
-            _buildInfoRow(
-              context,
-              label: 'Type',
-              value: types,
-            ),
+            _buildInfoRow(context, label: 'Type', value: types),
             const AtomSpacing.vertical24(),
             // Breeding Section
-            AtomText.bodyMediumBold(
-              'Breeding',
-              color: context.color.black,
-            ),
+            AtomText.bodyMediumBold('Breeding', color: context.color.black),
             const AtomSpacing.vertical12(),
-            _buildInfoRow(
-              context,
-              label: 'Egg Groups',
-              value: '-',
-            ),
-            _buildDivider(context),
-            _buildInfoRow(
-              context,
-              label: 'Egg Cycle',
-              value: '-',
+            BlocBuilder<PokemonSpeciesBloc, PokemonSpeciesState>(
+              builder: (context, state) {
+                final isSpeciesLoading = state is PokemonSpeciesLoading || state is PokemonSpeciesInitial;
+                String eggGroups = '-';
+                String eggCycle = '-';
+                
+                if (state is PokemonSpeciesSuccess) {
+                  final species = state.data;
+                  if (species.eggGroups != null && species.eggGroups!.isNotEmpty) {
+                    eggGroups = species.eggGroups!.map((e) => _capitalizeFirst(e.name ?? '')).join(', ');
+                  }
+                  if (species.hatchCounter != null) {
+                    final steps = species.hatchCounter! * 255;
+                    eggCycle = '${species.hatchCounter} ($steps steps)';
+                  }
+                }
+
+                return Skeletonizer(
+                  enabled: isSpeciesLoading || isLoading,
+                  child: Column(
+                    children: [
+                      _buildInfoRow(context, label: 'Egg Groups', value: eggGroups),
+                      _buildDivider(context),
+                      _buildInfoRow(context, label: 'Egg Cycle', value: eggCycle),
+                    ],
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -97,17 +114,11 @@ class PokemonDetailAboutTab extends StatelessWidget {
         children: [
           SizedBox(
             width: ConstantSizes.s80,
-            child: AtomText.bodySmall(
-              label,
-              color: context.color.grey,
-            ),
+            child: AtomText.bodySmall(label, color: context.color.grey),
           ),
           const SizedBox(width: ConstantSizes.s16),
           Expanded(
-            child: AtomText.bodySmallBold(
-              value,
-              color: context.color.black,
-            ),
+            child: AtomText.bodySmallBold(value, color: context.color.black),
           ),
         ],
       ),

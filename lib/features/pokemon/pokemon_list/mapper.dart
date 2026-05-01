@@ -26,19 +26,12 @@ extension PokemonListEntityMapper on pokemon_list_entity.PokemonListEntity {
 extension ResultsPokemonListResponseMapper
     on pokemon_list_response.ResultsPokemonList {
   pokemon_list_entity.ResultsPokemonList toEntity() {
-    String? imageUrl;
-    if (url != null && url!.isNotEmpty) {
-      final uri = Uri.tryParse(url!);
-      if (uri != null) {
-        final segments = uri.pathSegments.where((s) => s.isNotEmpty).toList();
-        if (segments.isNotEmpty) {
-          final id = segments.last;
-          imageUrl =
-              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
-        }
-      }
-    }
-    
+    final paths = url?.split('/').where((e) => e.isNotEmpty).toList();
+    final id = paths?.isNotEmpty == true ? paths!.last : null;
+    final imageUrl = id != null
+        ? 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png'
+        : null;
+
     return pokemon_list_entity.ResultsPokemonList(
       name: name,
       url: url,

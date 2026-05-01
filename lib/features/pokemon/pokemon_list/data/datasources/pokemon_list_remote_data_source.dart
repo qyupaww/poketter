@@ -25,6 +25,7 @@ class PokemonListRemoteDataSourceImpl implements PokemonListRemoteDataSource {
   }) async {
     final response = await http.get(
       MorphemeEndpoints.pokemonList,
+      body: body.toMap(),
       headers: headers,
       cacheStrategy: cacheStrategy ?? AsyncOrCacheStrategy(),
     );

@@ -48,12 +48,14 @@ class ResultsPokemonList extends Equatable {
   final List<String>? types;
   final String? imageUrl;
 
-  ResultsPokemonList copyWith({
-    String? name,
-    String? url,
-    List<String>? types,
-    String? imageUrl,
-  }) {
+  String get id {
+    if (url == null) return '0';
+    final uri = Uri.parse(url!);
+    final segments = uri.pathSegments.where((s) => s.isNotEmpty).toList();
+    return segments.isNotEmpty ? segments.last : '0';
+  }
+
+  ResultsPokemonList copyWith({String? name, String? url, List<String>? types, String? imageUrl}) {
     return ResultsPokemonList(
       name: name ?? this.name,
       url: url ?? this.url,

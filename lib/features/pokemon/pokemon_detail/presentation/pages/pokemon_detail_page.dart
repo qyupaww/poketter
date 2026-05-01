@@ -41,6 +41,11 @@ class _PokemonDetailPageState extends State<PokemonDetailPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(() {
+      if (_tabController.index == 2) {
+        cubit.fetchEvolution();
+      }
+    });
   }
 
   @override
