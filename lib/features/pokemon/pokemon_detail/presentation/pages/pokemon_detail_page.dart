@@ -196,7 +196,7 @@ class _PokemonDetailPageState extends State<PokemonDetailPage>
     Color mainColor,
   ) {
     return Padding(
-      padding: const EdgeInsets.only(top: ConstantSizes.s48),
+      padding: const EdgeInsets.only(top: ConstantSizes.s2),
       child: Column(
         children: [
           // Types Badges
@@ -216,7 +216,7 @@ class _PokemonDetailPageState extends State<PokemonDetailPage>
                   [const AtomTypeBadge(type: 'loading')],
             ),
           ),
-          const AtomSpacing.vertical20(),
+          const AtomSpacing.vertical12(),
           // TabBar
           TabBar(
             controller: _tabController,
@@ -226,9 +226,9 @@ class _PokemonDetailPageState extends State<PokemonDetailPage>
             indicatorWeight: 3,
             indicatorSize: TabBarIndicatorSize.label,
             dividerColor: Colors.transparent,
-            labelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            labelStyle: Theme.of(
+              context,
+            ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
             unselectedLabelStyle: Theme.of(context).textTheme.labelLarge,
             tabs: const [
               Tab(text: 'About'),
@@ -261,5 +261,4 @@ class _PokemonDetailPageState extends State<PokemonDetailPage>
       ),
     );
   }
-
 }

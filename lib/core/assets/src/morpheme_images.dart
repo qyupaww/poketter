@@ -5,4 +5,5 @@ abstract class MorphemeImages {
   static const String logoDark = '$_assets/logo_dark.png';
   static const String logoLight = '$_assets/logo_light.png';
   static const String pokeball = '$_assets/pokeball.svg';
+  static const String pokemon = '$_assets/pokemon.png';
 }

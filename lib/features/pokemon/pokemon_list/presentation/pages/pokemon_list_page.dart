@@ -1,4 +1,5 @@
 import 'package:morpheme_base/morpheme_base.dart';
+import 'package:poketter/core/assets/src/morpheme_images.dart';
 import 'package:poketter/core/global_variable.dart';
 import 'package:flutter/material.dart';
 import 'package:poketter/core/components/components.dart';
@@ -26,30 +27,36 @@ class _PokemonListPageState extends State<PokemonListPage>
   Widget buildWidget(BuildContext context) {
     return BlocBuilder<PokemonListBloc, PokemonListState>(
       builder: (context, state) {
-        final isLoading = state is PokemonListLoading || state is PokemonListInitial;
+        final isLoading =
+            state is PokemonListLoading || state is PokemonListInitial;
         final isFailed = state is PokemonListFailed;
         PokemonListEntity? data;
-        
+
         if (state is PokemonListSuccess) {
           data = state.data;
         }
 
         // Mock data for skeleton loading
-        final items = isLoading 
+        final items = isLoading
             ? List.generate(8, (index) => ResultsPokemonList.dummy())
             : data?.results ?? [];
 
         return Scaffold(
           backgroundColor: context.color.background,
           appBar: AppBar(
-            title: AtomText.heading2('Pokedex', color: context.color.black),
+            title: Image.asset(MorphemeImages.pokemon, height: 32),
             elevation: 0,
             backgroundColor: context.color.background,
             foregroundColor: context.color.black,
             centerTitle: false,
           ),
           body: isFailed
-              ? Center(child: AtomText.bodyMedium('Failed to load Pokemon list.', color: context.color.black))
+              ? Center(
+                  child: AtomText.bodyMedium(
+                    'Failed to load Pokemon list.',
+                    color: context.color.black,
+                  ),
+                )
               : Skeletonizer(
                   enabled: isLoading,
                   child: PokemonListGrid(items: items, isLoading: isLoading),
