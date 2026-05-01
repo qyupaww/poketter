@@ -6,9 +6,9 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:poketter/features/pokemon/pokemon_list/presentation/bloc/pokemon_list/pokemon_list_bloc.dart';
 import 'package:poketter/features/pokemon/pokemon_list/domain/entities/pokemon_list_entity.dart';
 import 'package:poketter/core/themes/morpheme_colors/morpheme_colors.dart';
-import 'package:poketter/core/extensions/string_extensions.dart';
 
 import '../cubit/pokemon_list_cubit.dart';
+import '../widgets/pokemon_list_grid.dart';
 
 class PokemonListPage extends StatefulWidget {
   const PokemonListPage({super.key});
@@ -36,7 +36,7 @@ class _PokemonListPageState extends State<PokemonListPage>
 
         // Mock data for skeleton loading
         final items = isLoading 
-            ? List.generate(8, (index) => const ResultsPokemonList(name: 'Loading...', url: 'https://pokeapi.co/api/v2/pokemon/1/'))
+            ? List.generate(8, (index) => ResultsPokemonList.dummy())
             : data?.results ?? [];
 
         return Scaffold(
@@ -52,78 +52,7 @@ class _PokemonListPageState extends State<PokemonListPage>
               ? Center(child: AtomText.bodyMedium('Failed to load Pokemon list.', color: context.color.black))
               : Skeletonizer(
                   enabled: isLoading,
-                  child: GridView.builder(
-                    padding: const EdgeInsets.all(16),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: 0.85,
-                    ),
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      final item = items[index];
-                      // Extract ID from URL
-                      final id = item.url?.split('/').reversed.elementAt(1) ?? '1';
-                      final imageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
-
-                      return InkWell(
-                        onTap: () {
-                          if (!isLoading) {
-                            context.read<PokemonListCubit>().goToDetail(context, id);
-                          }
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: context.color.pureWhite,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: context.color.black.withValues(alpha: .05),
-                                blurRadius: 10,
-                                offset: const Offset(0, 5),
-                              ),
-                            ],
-                          ),
-                          child: Stack(
-                            children: [
-                              // ID Text
-                              Positioned(
-                                top: 12,
-                                right: 12,
-                                child: AtomText.bodySmallBold(
-                                  '#${id.padLeft(3, '0')}',
-                                  color: context.color.grey,
-                                ),
-                              ),
-                              // Image and Name
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      child: AtomCachedNetworkImage(
-                                        imageUrl: imageUrl,
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 12),
-                                    AtomText.bodyLargeSemiBold(
-                                      item.name?.toCapitalized() ?? '',
-                                      color: context.color.black,
-                                    ),
-                                    const SizedBox(height: 4),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                  child: PokemonListGrid(items: items, isLoading: isLoading),
                 ),
         );
       },

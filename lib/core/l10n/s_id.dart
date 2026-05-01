@@ -15,8 +15,7 @@ class SId extends S {
   String get cancel => 'Batal';
 
   @override
-  String get emptyStateDescription =>
-      'Maaf, kami tidak menemukan hasil untuk pencarian Anda. Coba gunakan kata kunci lain.';
+  String get emptyStateDescription => 'Maaf, kami tidak menemukan hasil untuk pencarian Anda. Coba gunakan kata kunci lain.';
 
   @override
   String get emptyStateTitle => 'Hasil pencarian tidak ditemukan';

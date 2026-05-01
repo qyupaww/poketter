@@ -1,14 +1,2 @@
 
-🎨 Generating color classes...
-Formatted morpheme_colors.dart
-Formatted src\morpheme_color.dart
-Formatted src\morpheme_color_dark.dart
-Formatted src\morpheme_color_light.dart
-Formatted 4 files (4 changed) in 0.05 seconds.
-Formatted morpheme_themes.dart
-Formatted 4 files (1 changed) in 0.04 seconds.
-morpheme_lite color2dart generation completed
-[32;1mSUCCESS[0m
-✅ Color generation completed successfully
-Color2Dart generation completed successfully!
-[32;1mSUCCESS[0m
+[38;5;208;1mCannot setup flavor firebase, You don't have config "firebase" with flavor "dev" in morpheme.yaml[0m

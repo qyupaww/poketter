@@ -26,7 +26,6 @@ class PokemonDetailRemoteDataSourceImpl
   }) async {
     final response = await http.get(
       MorphemeEndpoints.pokemonDetail(body.id),
-      body: body.toMap(),
       headers: headers,
       cacheStrategy: cacheStrategy ?? AsyncOrCacheStrategy(),
     );

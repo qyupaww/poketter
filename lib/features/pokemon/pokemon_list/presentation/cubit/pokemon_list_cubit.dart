@@ -12,7 +12,7 @@ part 'pokemon_list_state.dart';
 
 class PokemonListCubit extends MorphemeCubit<PokemonListStateCubit> {
   PokemonListCubit({required this.pokemonListBloc})
-      : super(PokemonListStateCubit());
+    : super(PokemonListStateCubit());
 
   final PokemonListBloc pokemonListBloc;
 
@@ -30,15 +30,15 @@ class PokemonListCubit extends MorphemeCubit<PokemonListStateCubit> {
 
   @override
   List<BlocProvider> blocProviders(BuildContext context) => [
-        BlocProvider<PokemonListBloc>.value(value: pokemonListBloc),
-      ];
+    BlocProvider<PokemonListBloc>.value(value: pokemonListBloc),
+  ];
 
   @override
   List<BlocListener> blocListeners(BuildContext context) => [
-        BlocListener<PokemonListBloc, PokemonListState>(
-          listener: listenerPokemonListBloc,
-        ),
-      ];
+    BlocListener<PokemonListBloc, PokemonListState>(
+      listener: listenerPokemonListBloc,
+    ),
+  ];
 
   @override
   void dispose() {
@@ -47,20 +47,10 @@ class PokemonListCubit extends MorphemeCubit<PokemonListStateCubit> {
   }
 
   void listenerPokemonListBloc(BuildContext context, PokemonListState state) {
-    state.when(
-      onFailed: (state) {
-        // handle failed state
-      },
-      onSuccess: (state) {
-        // handle success state
-      },
-    );
+    // Error/Success states are handled by UI via BlocBuilder
   }
 
   void goToDetail(BuildContext context, String id) {
-    context.pushNamed(
-      ConstantRoutes.pokemonDetail,
-      pathParameters: {'id': id},
-    );
+    context.pushNamed(ConstantRoutes.pokemonDetail, pathParameters: {'id': id});
   }
 }
