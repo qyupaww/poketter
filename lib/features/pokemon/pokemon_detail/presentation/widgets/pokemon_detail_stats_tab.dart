@@ -126,31 +126,9 @@ class PokemonDetailStatsTab extends StatelessWidget {
                 const Expanded(child: SizedBox()),
               ],
             ),
-            const AtomSpacing.vertical24(),
-            // Type Defenses Section
-            Align(
-              alignment: Alignment.centerLeft,
-              child: AtomText.bodyMediumBold(
-                'Type defenses',
-                color: context.color.black,
-              ),
-            ),
-            const AtomSpacing.vertical8(),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: AtomText.bodySmall(
-                'The effectiveness of each type on ${_capitalize(data?.name ?? 'this Pokémon')}.',
-                color: context.color.grey,
-              ),
-            ),
           ],
         ),
       ),
     );
-  }
-
-  String _capitalize(String text) {
-    if (text.isEmpty) return text;
-    return text[0].toUpperCase() + text.substring(1);
   }
 }
