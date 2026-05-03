@@ -23,7 +23,7 @@ Future<void> main() async {
       evolutionDetails: [],
       evolvesTo: [
         response_evolution_chain.EvolvesToEvolutionChain(
-          species: response_evolution_chain.AlphaSpeciesEvolutionChain(
+          species: response_evolution_chain.SpeciesEvolutionChain(
             name: 'ivysaur',
             url: 'https://pokeapi.co/api/v2/pokemon-species/2/',
           ),
@@ -37,7 +37,7 @@ Future<void> main() async {
           ],
           evolvesTo: [
             response_evolution_chain.AlphaEvolvesToEvolutionChain(
-              species: response_evolution_chain.BetaSpeciesEvolutionChain(
+              species: response_evolution_chain.SpeciesEvolutionChain(
                 name: 'venusaur',
                 url: 'https://pokeapi.co/api/v2/pokemon-species/3/',
               ),
