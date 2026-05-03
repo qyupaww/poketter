@@ -153,6 +153,31 @@ class _PokemonListPageState extends State<PokemonListPage>
     return segments.isNotEmpty ? segments.last : value;
   }
 
+  Widget _filterDropdown({
+    required Key key,
+    required String? value,
+    required String hint,
+    required List<dynamic> options,
+    required ValueChanged<String?> onChanged,
+  }) {
+    return DropdownButtonFormField<String>(
+      key: key,
+      initialValue: value,
+      isExpanded: true,
+      hint: Text(hint, maxLines: 1, overflow: TextOverflow.ellipsis),
+      items: options.map<DropdownMenuItem<String>>((item) {
+        final option = item as Map<String, dynamic>;
+        final name = option['name'] as String? ?? '';
+        final url = option['url'] as String? ?? name;
+        return DropdownMenuItem(
+          value: url,
+          child: Text(name, maxLines: 1, overflow: TextOverflow.ellipsis),
+        );
+      }).toList(),
+      onChanged: onChanged,
+    );
+  }
+
   @override
   Widget buildWidget(BuildContext context) {
     return BlocBuilder<PokemonListBloc, PokemonListState>(
@@ -187,156 +212,144 @@ class _PokemonListPageState extends State<PokemonListPage>
                     color: context.color.black,
                   ),
                 )
-              : Skeletonizer(
-                  enabled: isLoading,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(ConstantSizes.defaultPadding),
-                        child: TextField(
-                          controller: _searchController,
-                          decoration: InputDecoration(
-                            hintText: 'Search Pokémon by name',
-                            prefixIcon: const Icon(Icons.search),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
+              : SafeArea(
+                  top: false,
+                  child: Skeletonizer(
+                    enabled: isLoading,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(ConstantSizes.defaultPadding),
+                          child: TextField(
+                            controller: _searchController,
+                            decoration: InputDecoration(
+                              hintText: 'Search Pokémon by name',
+                              prefixIcon: const Icon(Icons.search),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              isDense: true,
                             ),
-                            isDense: true,
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: ConstantSizes.defaultPadding,
-                        ),
-                        child: BlocBuilder<PokemonFilterCubit, PokemonFilterState>(
-                          bloc: _filterCubit,
-                          builder: (context, filterState) {
-                            final gens = filterState.generations ?? [];
-                            final types = filterState.types ?? [];
-                            final isFilterLoading = filterState.isLoading;
-                            final selectedGenName = _selectedFilterName(
-                              gens,
-                              _selectedGenerationUrl,
-                            );
-                            final selectedTypeName = _selectedFilterName(
-                              types,
-                              _selectedTypeUrl,
-                            );
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: DropdownButtonFormField<String>(
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: ConstantSizes.defaultPadding,
+                          ),
+                          child: BlocBuilder<PokemonFilterCubit, PokemonFilterState>(
+                            bloc: _filterCubit,
+                            builder: (context, filterState) {
+                              final gens = filterState.generations ?? [];
+                              final types = filterState.types ?? [];
+                              final isFilterLoading = filterState.isLoading;
+                              final selectedGenName = _selectedFilterName(
+                                gens,
+                                _selectedGenerationUrl,
+                              );
+                              final selectedTypeName = _selectedFilterName(
+                                types,
+                                _selectedTypeUrl,
+                              );
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  LayoutBuilder(
+                                    builder: (context, constraints) {
+                                      final generationDropdown = _filterDropdown(
                                         key: ValueKey(
                                           'generation_${_selectedGenerationUrl ?? 'none'}',
                                         ),
-                                        initialValue: _selectedGenerationUrl,
-                                        hint: const Text(
-                                          'Filter by generation',
-                                        ),
-                                        items: gens
-                                            .map<DropdownMenuItem<String>>((g) {
-                                              final name =
-                                                  g['name'] as String? ?? '';
-                                              final url =
-                                                  g['url'] as String? ?? '';
-                                              return DropdownMenuItem(
-                                                value: url,
-                                                child: Text(name),
-                                              );
-                                            })
-                                            .toList(),
-                                        onChanged: (v) {
-                                          _applyGenerationFilter(v);
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(width: ConstantSizes.s12),
-                                    Expanded(
-                                      child: DropdownButtonFormField<String>(
+                                        value: _selectedGenerationUrl,
+                                        hint: 'Filter by generation',
+                                        options: gens,
+                                        onChanged: _applyGenerationFilter,
+                                      );
+                                      final typeDropdown = _filterDropdown(
                                         key: ValueKey(
                                           'type_${_selectedTypeUrl ?? 'none'}',
                                         ),
-                                        initialValue: _selectedTypeUrl,
-                                        hint: const Text('Filter by type'),
-                                        items: types
-                                            .map<DropdownMenuItem<String>>((t) {
-                                              final name =
-                                                  t['name'] as String? ?? '';
-                                              final url =
-                                                  t['url'] as String? ?? name;
-                                              return DropdownMenuItem(
-                                                value: url,
-                                                child: Text(name),
-                                              );
-                                            })
-                                            .toList(),
-                                        onChanged: (v) {
-                                          _applyTypeFilter(v);
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                if (isFilterLoading)
-                                  SizedBox(height: ConstantSizes.s8),
-                                if (isFilterLoading)
-                                  LinearProgressIndicator(minHeight: 3),
-                                SizedBox(height: ConstantSizes.s8),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Wrap(
-                                        spacing: 8,
-                                        runSpacing: 4,
+                                        value: _selectedTypeUrl,
+                                        hint: 'Filter by type',
+                                        options: types,
+                                        onChanged: _applyTypeFilter,
+                                      );
+
+                                      if (constraints.maxWidth < 360) {
+                                        return Column(
+                                          children: [
+                                            generationDropdown,
+                                            SizedBox(height: ConstantSizes.s8),
+                                            typeDropdown,
+                                          ],
+                                        );
+                                      }
+
+                                      return Row(
                                         children: [
-                                          if (selectedGenName != null)
-                                            InputChip(
-                                              label: Text(selectedGenName),
-                                              onDeleted: () {
-                                                _applyGenerationFilter(null);
-                                              },
-                                            ),
-                                          if (selectedTypeName != null)
-                                            InputChip(
-                                              label: Text(selectedTypeName),
-                                              onDeleted: () {
-                                                _applyTypeFilter(null);
-                                              },
-                                            ),
+                                          Expanded(child: generationDropdown),
+                                          SizedBox(width: ConstantSizes.s12),
+                                          Expanded(child: typeDropdown),
                                         ],
+                                      );
+                                    },
+                                  ),
+                                  if (isFilterLoading)
+                                    SizedBox(height: ConstantSizes.s8),
+                                  if (isFilterLoading)
+                                    LinearProgressIndicator(minHeight: 3),
+                                  SizedBox(height: ConstantSizes.s8),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Wrap(
+                                          spacing: 8,
+                                          runSpacing: 4,
+                                          children: [
+                                            if (selectedGenName != null)
+                                              InputChip(
+                                                label: Text(selectedGenName),
+                                                onDeleted: () {
+                                                  _applyGenerationFilter(null);
+                                                },
+                                              ),
+                                            if (selectedTypeName != null)
+                                              InputChip(
+                                                label: Text(selectedTypeName),
+                                                onDeleted: () {
+                                                  _applyTypeFilter(null);
+                                                },
+                                              ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    if (_selectedGenerationUrl != null ||
-                                        _selectedTypeUrl != null)
-                                      TextButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _selectedGenerationUrl = null;
-                                            _selectedTypeUrl = null;
-                                          });
-                                          _refreshFilteredItems();
-                                        },
-                                        child: const Text('Clear filters'),
-                                      ),
-                                  ],
-                                ),
-                              ],
-                            );
-                          },
+                                      if (_selectedGenerationUrl != null ||
+                                          _selectedTypeUrl != null)
+                                        TextButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              _selectedGenerationUrl = null;
+                                              _selectedTypeUrl = null;
+                                            });
+                                            _refreshFilteredItems();
+                                          },
+                                          child: const Text('Clear filters'),
+                                        ),
+                                    ],
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                      SizedBox(height: ConstantSizes.s8),
-                      Expanded(
-                        child: PokemonListGrid(
-                          items: _visibleItems(items),
-                          isLoading: isLoading,
+                        SizedBox(height: ConstantSizes.s8),
+                        Expanded(
+                          child: PokemonListGrid(
+                            items: _visibleItems(items),
+                            isLoading: isLoading,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
         );

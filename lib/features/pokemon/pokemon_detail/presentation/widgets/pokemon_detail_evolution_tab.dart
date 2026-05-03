@@ -100,7 +100,7 @@ class PokemonDetailEvolutionTab extends StatelessWidget {
         return Skeletonizer(
           enabled: isLoading || isEvolutionLoading,
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(vertical: ConstantSizes.s24),
+            padding: const EdgeInsets.symmetric(vertical: ConstantSizes.s2),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
