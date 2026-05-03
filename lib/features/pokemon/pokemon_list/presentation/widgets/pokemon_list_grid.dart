@@ -29,14 +29,12 @@ class PokemonListGrid extends StatelessWidget {
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
-        // Extract ID from URL
-        final id = item.url?.split('/').reversed.elementAt(1) ?? '1';
 
         return AtomPokemonCard(
           pokemon: item,
           onTap: () {
             if (!isLoading) {
-              context.read<PokemonListCubit>().goToDetail(context, id);
+              context.read<PokemonListCubit>().goToDetail(context, item.id);
             }
           },
         );

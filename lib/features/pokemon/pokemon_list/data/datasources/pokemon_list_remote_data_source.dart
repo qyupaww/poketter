@@ -23,8 +23,9 @@ class PokemonListRemoteDataSourceImpl implements PokemonListRemoteDataSource {
     Map<String, String>? headers,
     CacheStrategy? cacheStrategy,
   }) async {
+    // Use pokemonAll with high limit to fetch all Pokemon across all generations
     final response = await http.get(
-      MorphemeEndpoints.pokemonList,
+      MorphemeEndpoints.pokemonAll(limit: 10000, offset: 0),
       body: body.toMap(),
       headers: headers,
       cacheStrategy: cacheStrategy ?? AsyncOrCacheStrategy(),

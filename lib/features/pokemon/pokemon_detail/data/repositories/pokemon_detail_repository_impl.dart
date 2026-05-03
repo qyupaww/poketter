@@ -13,6 +13,7 @@ import '../models/body/pokemon_detail_body.dart';
 class PokemonDetailRepositoryImpl implements PokemonDetailRepository {
   PokemonDetailRepositoryImpl({required this.remoteDataSource});
   final PokemonDetailRemoteDataSource remoteDataSource;
+  final Map<String, PokemonDetailEntity> _pokemonDetailCache = {};
   @override
   Future<Either<MorphemeFailure, PokemonDetailEntity>> pokemonDetail(
     PokemonDetailBody body, {
@@ -20,12 +21,17 @@ class PokemonDetailRepositoryImpl implements PokemonDetailRepository {
     CacheStrategy? cacheStrategy,
   }) async {
     try {
+      if (_pokemonDetailCache.containsKey(body.id)) {
+        return Right(_pokemonDetailCache[body.id]!);
+      }
       final data = await remoteDataSource.pokemonDetail(
         body,
         headers: headers,
         cacheStrategy: cacheStrategy,
       );
-      return Right(data.toEntity());
+      final entity = data.toEntity();
+      _pokemonDetailCache[body.id] = entity;
+      return Right(entity);
     } on MorphemeException catch (e) {
       return Left(e.toMorphemeFailure());
     } catch (e) {
