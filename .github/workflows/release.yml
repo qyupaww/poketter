@@ -15,14 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
       - uses: subosito/flutter-action@v2
         with:
-          channel: stable
+          flutter-version: '3.41.7'
           cache: true
 
       - name: Get dependencies
@@ -45,7 +45,7 @@ jobs:
             --dart-define=BASE_URL=https://pokeapi.co/api/v2
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: android-release
           path: |
@@ -61,13 +61,13 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Download Android artifacts
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@v4
         with:
           name: android-release
           path: artifacts/android
 
       - name: Create Release
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
           files: |
