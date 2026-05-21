@@ -51,7 +51,7 @@ jobs:
             --dart-define=BASE_URL=https://pokeapi.co/api/v2
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: android-release
           path: |

@@ -63,7 +63,7 @@ jobs:
 
       - name: Upload coverage
         if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-report
           path: coverage/lcov.info
@@ -104,7 +104,7 @@ jobs:
             --dart-define=BASE_URL=https://pokeapi.co/api/v2
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: app-dev-apk
           path: build/app/outputs/flutter-apk/app-release.apk
