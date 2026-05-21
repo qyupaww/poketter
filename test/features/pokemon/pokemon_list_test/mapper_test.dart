@@ -28,6 +28,8 @@ Future<void> main() async {
         entity_pokemon_list.ResultsPokemonList(
           name: 'bulbasaur',
           url: 'https://pokeapi.co/api/v2/pokemon/1/',
+          imageUrl:
+              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png',
         ),
       ],
     );

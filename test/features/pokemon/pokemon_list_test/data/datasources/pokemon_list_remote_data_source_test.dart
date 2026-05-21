@@ -21,7 +21,7 @@ Future<void> main() async {
   late MockMorphemeHttp http;
   late PokemonListRemoteDataSource remoteDataSource;
 
-  final urlPokemonList = MorphemeEndpoints.pokemonList;
+  final urlPokemonList = MorphemeEndpoints.pokemonAll(limit: 10000, offset: 0);
   const bodyPokemonList = body_pokemon_list.PokemonListBody();
 
   setUp(() {
