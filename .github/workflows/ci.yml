@@ -22,14 +22,8 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install Morpheme CLI Lite
-        run: dart pub global activate morpheme_cli_lite
-
       - name: Get dependencies
         run: flutter pub get
-
-      # - name: Generate localization
-      #   run: morpheme_lite l10n
 
       - name: Analyze code
         run: flutter analyze --no-fatal-infos
@@ -49,21 +43,15 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install Morpheme CLI Lite
-        run: dart pub global activate morpheme_cli_lite
-
       - name: Get dependencies
         run: flutter pub get
-
-      # - name: Generate localization
-      #   run: morpheme_lite l10n
 
       - name: Run tests
         run: flutter test --coverage
 
       - name: Upload coverage
         if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-report
           path: coverage/lcov.info
@@ -76,7 +64,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
@@ -86,14 +74,8 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install Morpheme CLI Lite
-        run: dart pub global activate morpheme_cli_lite
-
       - name: Get dependencies
         run: flutter pub get
-
-      # - name: Generate localization
-      #   run: morpheme_lite l10n
 
       - name: Build APK (Dev)
         run: |
@@ -104,7 +86,7 @@ jobs:
             --dart-define=BASE_URL=https://pokeapi.co/api/v2
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: app-dev-apk
           path: build/app/outputs/flutter-apk/app-release.apk
