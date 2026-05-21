@@ -81,8 +81,9 @@ jobs:
         run: |
           flutter build apk --release \
             --dart-define=FLAVOR=dev \
-            --dart-define=APP_NAME="Poketter Dev" \
-            --dart-define=ANDROID_APPLICATION_ID=com.example.poketter.dev \
+            --dart-define=APP_NAME="Poketter" \
+            --dart-define=ANDROID_APPLICATION_ID=poketter.dev \
+            --dart-define=IOS_APPLICATION_ID=poketter.dev \
             --dart-define=BASE_URL=https://pokeapi.co/api/v2
 
       - name: Upload APK

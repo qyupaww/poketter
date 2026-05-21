@@ -28,20 +28,22 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Build APK (Production)
+      - name: Build APK
         run: |
           flutter build apk --release \
-            --dart-define=FLAVOR=prod \
+            --dart-define=FLAVOR=dev \
             --dart-define=APP_NAME="Poketter" \
-            --dart-define=ANDROID_APPLICATION_ID=com.example.poketter \
+            --dart-define=ANDROID_APPLICATION_ID=poketter.dev \
+            --dart-define=IOS_APPLICATION_ID=poketter.dev \
             --dart-define=BASE_URL=https://pokeapi.co/api/v2
 
-      - name: Build App Bundle (Production)
+      - name: Build App Bundle
         run: |
           flutter build appbundle --release \
-            --dart-define=FLAVOR=prod \
+            --dart-define=FLAVOR=dev \
             --dart-define=APP_NAME="Poketter" \
-            --dart-define=ANDROID_APPLICATION_ID=com.example.poketter \
+            --dart-define=ANDROID_APPLICATION_ID=poketter.dev \
+            --dart-define=IOS_APPLICATION_ID=poketter.dev \
             --dart-define=BASE_URL=https://pokeapi.co/api/v2
 
       - name: Upload artifacts
