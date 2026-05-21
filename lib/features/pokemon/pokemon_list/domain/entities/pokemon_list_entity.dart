@@ -40,7 +40,8 @@ class ResultsPokemonList extends Equatable {
     name: 'bulbasaur',
     url: 'https://pokeapi.co/api/v2/pokemon/1/',
     types: const ['grass', 'poison'],
-    imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png',
+    imageUrl:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png',
   );
 
   final String? name;
@@ -55,7 +56,12 @@ class ResultsPokemonList extends Equatable {
     return segments.isNotEmpty ? segments.last : '0';
   }
 
-  ResultsPokemonList copyWith({String? name, String? url, List<String>? types, String? imageUrl}) {
+  ResultsPokemonList copyWith({
+    String? name,
+    String? url,
+    List<String>? types,
+    String? imageUrl,
+  }) {
     return ResultsPokemonList(
       name: name ?? this.name,
       url: url ?? this.url,

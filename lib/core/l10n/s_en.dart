@@ -15,7 +15,8 @@ class SEn extends S {
   String get cancel => 'Cancel';
 
   @override
-  String get emptyStateDescription => 'Sorry, we couldn\'t find any results for your search. Try using another keyword.';
+  String get emptyStateDescription =>
+      'Sorry, we couldn\'t find any results for your search. Try using another keyword.';
 
   @override
   String get emptyStateTitle => 'No results found';

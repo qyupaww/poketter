@@ -69,14 +69,19 @@ class PokemonDetailAboutTab extends StatelessWidget {
             const AtomSpacing.vertical12(),
             BlocBuilder<PokemonSpeciesBloc, PokemonSpeciesState>(
               builder: (context, state) {
-                final isSpeciesLoading = state is PokemonSpeciesLoading || state is PokemonSpeciesInitial;
+                final isSpeciesLoading =
+                    state is PokemonSpeciesLoading ||
+                    state is PokemonSpeciesInitial;
                 String eggGroups = '-';
                 String eggCycle = '-';
-                
+
                 if (state is PokemonSpeciesSuccess) {
                   final species = state.data;
-                  if (species.eggGroups != null && species.eggGroups!.isNotEmpty) {
-                    eggGroups = species.eggGroups!.map((e) => _capitalizeFirst(e.name ?? '')).join(', ');
+                  if (species.eggGroups != null &&
+                      species.eggGroups!.isNotEmpty) {
+                    eggGroups = species.eggGroups!
+                        .map((e) => _capitalizeFirst(e.name ?? ''))
+                        .join(', ');
                   }
                   if (species.hatchCounter != null) {
                     final steps = species.hatchCounter! * 255;
@@ -88,9 +93,17 @@ class PokemonDetailAboutTab extends StatelessWidget {
                   enabled: isSpeciesLoading || isLoading,
                   child: Column(
                     children: [
-                      _buildInfoRow(context, label: 'Egg Groups', value: eggGroups),
+                      _buildInfoRow(
+                        context,
+                        label: 'Egg Groups',
+                        value: eggGroups,
+                      ),
                       _buildDivider(context),
-                      _buildInfoRow(context, label: 'Egg Cycle', value: eggCycle),
+                      _buildInfoRow(
+                        context,
+                        label: 'Egg Cycle',
+                        value: eggCycle,
+                      ),
                     ],
                   ),
                 );
