@@ -34,7 +34,7 @@ dependencies:
 
   # Component
   skeletonizer: ^2.1.2
-  flutter_svg: ^2.2.3
+  flutter_svg: ^2.3.0
   flutter_map: ^8.2.2
   url_launcher: ^6.3.2
 
